@@ -1,3 +1,3 @@
 # Chronos
 
-** TODO: Add description **
+An Elixir library for handling dates
