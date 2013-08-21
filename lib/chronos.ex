@@ -41,15 +41,16 @@ defmodule Chronos do
   defp _opts_date({ :ok, date }), do: date
 
   defmacro __using__(opts // []) do
-    date = cond do
-      opts[:date] ->
-        Keyword.values(opts) |> Enum.fetch(0) |> _opts_date
-      :else ->
-        :erlang.date
+    date = fn() -> cond do
+        opts[:date] ->
+          Keyword.values(opts) |> Enum.fetch(0) |> _opts_date
+        :else ->
+          :erlang.date
+      end
     end
 
     quote do
-      def today, do: unquote(date)
+      def today, do: unquote(date.())
 
       def now, do: unquote(__MODULE__).now
 
@@ -59,11 +60,11 @@ defmodule Chronos do
 
       def day(date), do: unquote(__MODULE__).day(date)
 
-      def yesterday(date // unquote(date)) do
+      def yesterday(date // unquote(date.())) do
         unquote(__MODULE__).yesterday(date)
       end
 
-      def tomorrow(date // unquote(date)) do
+      def tomorrow(date // unquote(date.())) do
         unquote(__MODULE__).tomorrow(date)
       end
     end
