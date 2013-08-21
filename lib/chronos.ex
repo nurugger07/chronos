@@ -9,19 +9,20 @@ defmodule Chronos do
   end
 
   def year(date) do
-    { year, _, _ } = validate(date)
-    year
+    validate(date) |> _extract_seg(:year)
   end
 
   def month(date) do
-    { _, month, _ } = validate(date)
-    month
+    validate(date) |> _extract_seg(:month)
   end
 
   def day(date) do
-    { _, _, day } = validate(date)
-    day
+    validate(date) |> _extract_seg(:day)
   end
+
+  defp _extract_seg({ year, _, _ }, :year), do: year
+  defp _extract_seg({ _, month, _ }, :month), do: month
+  defp _extract_seg({ _, _, day }, :day), do: day
 
   defp _opts_date({ :ok, date }), do: date
 
