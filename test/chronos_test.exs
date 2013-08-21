@@ -34,6 +34,11 @@ defmodule ChronosTest do
     assert yesterday == { 2012, 12, 20 }
   end
 
+  test :tomorrow do
+    assert today |> tomorrow == { 2012, 12, 22 }
+    assert tomorrow == { 2012, 12, 22 }
+  end
+
   defp _extract_seg({ year, _, _ }, :year), do: year
   defp _extract_seg({ _, month, _ }, :month), do: month
   defp _extract_seg({ _, _, day }, :day), do: day
