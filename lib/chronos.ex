@@ -35,10 +35,27 @@ defmodule Chronos do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
+  def days_from(days, date // :erlang.date) when days > 0 do
+    validate(date) |> days_for_date |> date_for_days(days)
+  end
+  def days_from(_, _) do
+    raise ArgumentError, message: "Number of days must be a positive integer"
+  end
+
+  def weeks_ago(weeks, date // :erlang.date) when weeks > 0 do
+    validate(date) |> days_for_date |> date_for_weeks(-weeks)
+  end
+  def weeks_ago(_, _) do
+    raise ArgumentError, message: "Number of weeks must be a positive integer"
+  end
+
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
 
   defp date_for_days(days, offset // 0) when is_integer(days) do
     :calendar.gregorian_days_to_date(days + offset)
+  end
+  defp date_for_weeks(days, weeks // 0) when is_integer(days) do
+    date_for_days(days, weeks * 7)
   end
 
   defp _extract_seg({ year, _, _ }, :year), do: year
@@ -77,6 +94,14 @@ defmodule Chronos do
 
       def days_ago(days, date // unquote(date.())) do
         unquote(__MODULE__).days_ago(days, date)
+      end
+
+      def days_from(days, date // unquote(date.())) do
+        unquote(__MODULE__).days_from(days, date)
+      end
+
+      def weeks_ago(weeks, date // unquote(date.())) do
+        unquote(__MODULE__).weeks_ago(weeks, date)
       end
     end
   end
