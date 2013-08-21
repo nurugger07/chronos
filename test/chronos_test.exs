@@ -43,6 +43,18 @@ defmodule ChronosTest do
     assert { 2012, 12, 31 } |> tomorrow == { 2013, 1, 1 }
   end
 
+  test :days_ago do
+    assert 10 |> days_ago == { 2012, 12, 11 }
+    assert 3 |> days_ago({ 2013, 1, 1 }) == { 2012, 12, 29 }
+
+    assert_raise ArgumentError, "Number of days must be a positive integer", fn ->
+      days_ago(-3, @today)
+    end
+    assert_raise ArgumentError, "Number of days must be a positive integer", fn ->
+      days_ago(-2)
+    end
+  end
+
   defp _extract_seg({ year, _, _ }, :year), do: year
   defp _extract_seg({ _, month, _ }, :month), do: month
   defp _extract_seg({ _, _, day }, :day), do: day

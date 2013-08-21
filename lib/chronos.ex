@@ -28,6 +28,13 @@ defmodule Chronos do
     validate(date) |> days_for_date |> date_for_days(1)
   end
 
+  def days_ago(days, date // :erlang.date) when days > 0 do
+    validate(date) |> days_for_date |> date_for_days(-days)
+  end
+  def days_ago(_, _) do
+    raise ArgumentError, message: "Number of days must be a positive integer"
+  end
+
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
 
   defp date_for_days(days, offset // 0) when is_integer(days) do
@@ -66,6 +73,10 @@ defmodule Chronos do
 
       def tomorrow(date // unquote(date.())) do
         unquote(__MODULE__).tomorrow(date)
+      end
+
+      def days_ago(days, date // unquote(date.())) do
+        unquote(__MODULE__).days_ago(days, date)
       end
     end
   end
