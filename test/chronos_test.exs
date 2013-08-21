@@ -1,9 +1,13 @@
+defmodule HourGlassFixture do
+  use Chronos, date: { 2012, 12, 21 }
+end
+
 defmodule ChronosTest do
   use ExUnit.Case
 
-  import Chronos
+  @today { 2012, 12, 21 }
 
-  @today :erlang.date
+  import HourGlassFixture
 
   test :today do
     assert today == @today

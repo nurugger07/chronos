@@ -7,6 +7,6 @@ defmodule FormatterTest do
 
   test :short_date_string do
     { year, month, day } = @today
-    assert Chronos.today |> to_short_date_string == "#{year}-#{month}-#{day}"
+    assert @today |> to_short_date_string == "#{year}-#{month}-#{day}"
   end
 end
