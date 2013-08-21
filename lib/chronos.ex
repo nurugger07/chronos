@@ -21,11 +21,11 @@ defmodule Chronos do
   end
 
   def yesterday(date // :erlang.date) do
-    date |> days_for_date |> date_for_days(-1)
+    validate(date) |> days_for_date |> date_for_days(-1)
   end
 
   def tomorrow(date // :erlang.date) do
-    date |> days_for_date |> date_for_days(1)
+    validate(date) |> days_for_date |> date_for_days(1)
   end
 
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
