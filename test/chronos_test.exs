@@ -17,15 +17,15 @@ defmodule ChronosTest do
     assert now == :calendar.now_to_datetime(:erlang.now)
   end
 
-  test "today's year" do
+  test :year do
     assert today |> year  == _extract_seg(@today, :year)
   end
 
-  test "today's month" do
+  test :month do
     assert today |> month == _extract_seg(@today, :month)
   end
 
-  test "today's day" do
+  test :day do
     assert today |> day == _extract_seg(@today, :day)
   end
 
@@ -71,6 +71,15 @@ defmodule ChronosTest do
 
     assert_raise ArgumentError, "Number of weeks must be a positive integer", fn ->
       weeks_ago(-3, @today)
+    end
+  end
+
+  test :weeks_from do
+    assert 1 |> weeks_from == { 2012, 12, 28 }
+    assert 2 |> weeks_from == { 2013, 1, 4 }
+
+    assert_raise ArgumentError, "Number of weeks must be a positive integer", fn ->
+      weeks_from(-3, @today)
     end
   end
 

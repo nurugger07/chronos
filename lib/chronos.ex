@@ -49,6 +49,13 @@ defmodule Chronos do
     raise ArgumentError, message: "Number of weeks must be a positive integer"
   end
 
+  def weeks_from(weeks, date // :erlang.date) when weeks > 0 do
+    validate(date) |> days_for_date |> date_for_weeks(weeks)
+  end
+  def weeks_from(_, _) do
+    raise ArgumentError, message: "Number of weeks must be a positive integer"
+  end
+
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
 
   defp date_for_days(days, offset // 0) when is_integer(days) do
@@ -102,6 +109,10 @@ defmodule Chronos do
 
       def weeks_ago(weeks, date // unquote(date.())) do
         unquote(__MODULE__).weeks_ago(weeks, date)
+      end
+
+      def weeks_from(weeks, date // unquote(date.())) do
+        unquote(__MODULE__).weeks_from(weeks, date)
       end
     end
   end
