@@ -4,57 +4,55 @@ defmodule Chronos do
 
   def today, do: :erlang.date
 
-  def now do
-    :erlang.now |> :calendar.now_to_datetime
-  end
+  def now, do: :erlang.now |> :calendar.now_to_datetime
 
-  def year(date) do
-    validate(date) |> _extract_seg(:year)
-  end
+  def year(date), do: validate(date) |> _extract_seg(:year)
 
-  def month(date) do
-    validate(date) |> _extract_seg(:month)
-  end
+  def month(date), do: validate(date) |> _extract_seg(:month)
 
-  def day(date) do
-    validate(date) |> _extract_seg(:day)
-  end
+  def day(date), do: validate(date) |> _extract_seg(:day)
 
-  def yesterday(date // :erlang.date) do
-    validate(date) |> days_for_date |> date_for_days(-1)
-  end
+  def yesterday(date // :erlang.date), do: calculate_date_for_days(date, -1)
 
-  def tomorrow(date // :erlang.date) do
-    validate(date) |> days_for_date |> date_for_days(1)
-  end
+  def tomorrow(date // :erlang.date), do: calculate_date_for_days(date, 1)
 
   def days_ago(days, date // :erlang.date) when days > 0 do
-    validate(date) |> days_for_date |> date_for_days(-days)
+    calculate_date_for_days(date, -days)
   end
   def days_ago(_, _) do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
   def days_from(days, date // :erlang.date) when days > 0 do
-    validate(date) |> days_for_date |> date_for_days(days)
+    calculate_date_for_days(date, days)
   end
   def days_from(_, _) do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
   def weeks_ago(weeks, date // :erlang.date) when weeks > 0 do
-    validate(date) |> days_for_date |> date_for_weeks(-weeks)
+    calculate_date_for_weeks(date, -weeks)
   end
   def weeks_ago(_, _) do
     raise ArgumentError, message: "Number of weeks must be a positive integer"
   end
 
   def weeks_from(weeks, date // :erlang.date) when weeks > 0 do
-    validate(date) |> days_for_date |> date_for_weeks(weeks)
+    calculate_date_for_weeks(date, weeks)
   end
   def weeks_from(_, _) do
     raise ArgumentError, message: "Number of weeks must be a positive integer"
   end
+
+  defp calculate_date_for_days(date, days) do
+   covert_date_to_days(date) |> date_for_days(days)
+  end
+
+  defp calculate_date_for_weeks(date, weeks) do
+   covert_date_to_days(date) |> date_for_weeks(weeks)
+  end
+
+  defp covert_date_to_days(date), do: validate(date) |> days_for_date
 
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
 
