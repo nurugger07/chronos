@@ -136,10 +136,10 @@ defmodule Chronos do
 
   defp days_for_date(date), do: :calendar.date_to_gregorian_days(date)
 
-  defp date_for_days(days, offset // 0) when is_integer(days) do
+  defp date_for_days(days, offset) when is_integer(days) do
     :calendar.gregorian_days_to_date(days + offset)
   end
-  defp date_for_weeks(days, weeks // 0) when is_integer(days) do
+  defp date_for_weeks(days, weeks) when is_integer(days) do
     date_for_days(days, weeks * 7)
   end
 
