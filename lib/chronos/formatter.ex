@@ -11,9 +11,16 @@ defmodule Chronos.Formatter do
     to_list(time) |> format_for(@default_time_format)
   end
 
+  def strftime(string) do
+    {hour, minute, second} = :erlang.time
+    {year, month, day} = :erlang.date
+    Regex.replace(%r"%h", string, :io_lib.format("~2..0B", [hour]))
+  end
+
   defp to_list(date) when is_tuple(date), do: tuple_to_list(date)
 
   defp format_for(date, format) when is_list(date) do
     :io_lib.format(format, date) |> iolist_to_binary
   end
+
 end

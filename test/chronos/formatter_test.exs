@@ -13,6 +13,17 @@ defmodule FormatterTest do
 
   test :short_time_string do
     { hour, minute, second } = @now
-    assert @now |> to_short_time_string == "#{hour}:#{:io_lib.format("~2..0B",[minute])}:#{:io_lib.format("~2..0B",[second])}"
+    assert @now |> to_short_time_string == "#{:io_lib.format("~2..0B",[hour])}:#{:io_lib.format("~2..0B",[minute])}:#{:io_lib.format("~2..0B",[second])}"
   end
+
+  test :strftime_without_percent_symbol do
+
+  end
+
+  test :strftime_using_hours do
+    {hour, _, _}= @now
+    str = "%h"
+    assert strftime(str) == to_string :io_lib.format("~2..0B",[hour])
+  end
+
 end
