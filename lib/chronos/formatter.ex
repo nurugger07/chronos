@@ -1,6 +1,6 @@
 defmodule Chronos.Formatter do
 
-  @default_date_format "~4..0B-~1..0B-~2..0B"
+  @default_date_format "~4..0B-~2..0B-~2..0B"
   @default_time_format "~2..0B:~2..0B:~2..0B"
 
   def to_short_date_string(date) do
