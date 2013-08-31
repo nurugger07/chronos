@@ -14,8 +14,10 @@ defmodule Chronos.Formatter do
   def strftime(string) do
     {hour, minute, second} = :erlang.time
     {year, month, day} = :erlang.date
-    Regex.replace(%r"%h", string, :io_lib.format("~2..0B", [hour]))
+    Regex.replace(%r"%h", string, two_digits(hour))
   end
+
+  def two_digits(x), do: to_string :io_lib.format("~2..0B",[x])
 
   defp to_list(date) when is_tuple(date), do: tuple_to_list(date)
 
