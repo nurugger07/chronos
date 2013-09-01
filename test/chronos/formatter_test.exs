@@ -21,10 +21,10 @@ defmodule FormatterTest do
     assert str |> strftime == str
   end
 
-  test :strftime_using_hours do
-    {hour, _, _}= @now
-    str = "%h"
-    assert str |> strftime == two_digits hour
+  test :strftime_using_hours_minutes_and_seconds do
+    {hour, minute, second}= @now
+    str = "%h:%m:%s"
+    assert strftime(str) == "#{two_digits hour}:#{two_digits minute}:#{two_digits second}"
   end
 
 end
