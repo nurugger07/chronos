@@ -15,12 +15,18 @@ defmodule Chronos.Formatter do
     {hour, minute, second} = :erlang.time
     {year, month, day} = :erlang.date
     cond do
+      Regex.match?(%r"%d", string) ->
+        strftime(Regex.replace(%r"%d", string, two_digits(day)))
+      Regex.match?(%r"%m", string) ->
+        strftime(Regex.replace(%r"%m", string, two_digits(month)))
+      Regex.match?(%r"%y", string) ->
+        strftime(Regex.replace(%r"%y", string, to_string year))
       Regex.match?(%r"%s", string) ->
         strftime(Regex.replace(%r"%s", string, two_digits(second)))
-      Regex.match?(%r"%m", string) ->
-        strftime(Regex.replace(%r"%m", string, two_digits(minute)))
-      Regex.match?(%r"%h", string) ->
-        strftime(Regex.replace(%r"%h", string, two_digits(hour)))
+      Regex.match?(%r"%M", string) ->
+        strftime(Regex.replace(%r"%M", string, two_digits(minute)))
+      Regex.match?(%r"%H", string) ->
+        strftime(Regex.replace(%r"%H", string, two_digits(hour)))
       true ->
         string
     end

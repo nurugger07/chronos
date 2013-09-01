@@ -23,8 +23,14 @@ defmodule FormatterTest do
 
   test :strftime_using_hours_minutes_and_seconds do
     {hour, minute, second}= @now
-    str = "%h:%m:%s"
+    str = "%H:%M:%s"
     assert strftime(str) == "#{two_digits hour}:#{two_digits minute}:#{two_digits second}"
+  end
+
+  test :strftime_using_days_months_and_days do
+    {year, month, day}= @today
+    str = "%y-%m-%d"
+    assert strftime(str) == "#{year}-#{two_digits month}-#{two_digits day}"
   end
 
 end
