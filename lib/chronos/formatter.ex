@@ -1,9 +1,16 @@
 defmodule Chronos.Formatter do
 
-  def strftime({ y, _, _ }, f) when f =="%Y", do: to_binary(y)
-  def strftime({ y, _, _ }, f) when f =="%y", do: rem(y, 100) |> to_binary
+  def strftime(date, f) do
+    format(String.split(f, %r{(%.?)}), date) |> Enum.join
+  end
 
-  def strftime({ _, m, _ }, f) when f =="%m", do: to_binary(m)
-  def strftime({ _, _, d }, f) when f =="%d", do: to_binary(d)
+  defp format([], _), do: []
+  defp format([h|t], date), do: [apply_format(date, h)] ++ format(t, date)
+
+  defp apply_format({y, _, _}, "%Y"), do: to_binary(y)
+  defp apply_format({y, _, _}, "%y"), do: rem(y, 100) |> to_binary
+  defp apply_format({ _, m, _ }, "%m"), do: to_binary(m)
+  defp apply_format({ _, _, d }, "%d"), do: to_binary(d)
+  defp apply_format(_, f), do: f
 
 end

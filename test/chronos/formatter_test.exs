@@ -15,6 +15,10 @@ defmodule FormatterTest do
 
     # Day
     assert strftime(@today, "%d") == "21"
+    assert strftime({2012, 12, 1}, "%d") == "1"
+
+    assert strftime(@today, "Presented on %m/%d/%Y") == "Presented on 12/21/2012"
+    assert strftime(@today, "%Y-%m-%d") == "2012-12-21"
   end
 
 end
