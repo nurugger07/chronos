@@ -10,6 +10,9 @@ defmodule FormatterTest do
   end
 
   test :strftime_dates do
+    # Date
+    assert strftime(@today, "%D") == "12/21/2012"
+
     # Year
     assert strftime(@today, "%Y") == "2012"
     assert strftime(@today, "%y") == "12"
