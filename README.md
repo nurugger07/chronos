@@ -43,20 +43,20 @@ There are a number of functions to help with dates including below are some of t
 ```iex
 # yesterday without a date assumes you want the day before the current date
 # current date is {2012, 12, 21}
-iex(1)> Chronos.yesterday
+iex> Chronos.yesterday
 {2012, 12, 20}
 
-iex(2)> Chronos.tomorrow
+iex> Chronos.tomorrow
 {2012, 12, 22}
 ```
 
 You can find the date for days or weeks in the past or future:
 
 ```iex
-iex(1)> Chronos.days_ago(3)
+iex> Chronos.days_ago(3)
 {2012, 12, 18}
 
-iex(2)> Chronos.weeks_ago(5)
+iex> Chronos.weeks_ago(5)
 {2012, 11, 16}
 ```
 
@@ -77,10 +77,10 @@ If the date option is set the default date for all functions will be that date.
 With the addition of Chronos.Formatter, you can begin to format date tuples to something more readable.
 
 ```iex
-iex(1)> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
+iex> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
 "2012-12-21"
 
-iex(2)> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
+iex> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
 "Presented on 12/21/2012"
 
 ```
