@@ -5,6 +5,10 @@ defmodule FormatterTest do
 
   import Chronos.Formatter
 
+  test :to_short_date do
+    assert to_short_date(@today) == "2012-12-21"
+  end
+
   test :strftime_dates do
     # Year
     assert strftime(@today, "%Y") == "2012"

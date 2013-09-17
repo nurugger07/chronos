@@ -1,5 +1,7 @@
 defmodule Chronos.Formatter do
 
+  @short_date "%Y-%m-%d"
+
   @doc """
 
   The Chronos.Formatter module is used to format date tuples
@@ -13,6 +15,16 @@ defmodule Chronos.Formatter do
   def strftime(date, f) do
     format(String.split(f, %r{(%.?)}), date) |> Enum.join
   end
+
+  @doc """
+
+  The to_short_date function applies the default short date format to
+  a specified date
+
+  iex(1)> Chronos.Formatter.to_short_date({2012, 12, 21})
+  "2012-12-21"
+  """
+  def to_short_date(date), do: strftime(date, @short_date)
 
   defp format([], _), do: []
   defp format([h|t], date), do: [apply_format(date, h)] ++ format(t, date)
