@@ -1,5 +1,15 @@
 defmodule Chronos.Formatter do
 
+  @doc """
+
+  The Chronos.Formatter module is used to format date tuples
+
+  iex(1)> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
+  "2012-12-21"
+  iex(2)> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
+  "Presented on 12/21/2012"
+
+  """
   def strftime(date, f) do
     format(String.split(f, %r{(%.?)}), date) |> Enum.join
   end
