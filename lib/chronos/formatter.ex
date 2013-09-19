@@ -6,9 +6,10 @@ defmodule Chronos.Formatter do
 
   The Chronos.Formatter module is used to format date tuples
 
-  iex(1)> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
+  iex> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
   "2012-12-21"
-  iex(2)> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
+
+  iex> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
   "Presented on 12/21/2012"
 
   """
@@ -21,8 +22,9 @@ defmodule Chronos.Formatter do
   The to_short_date function applies the default short date format to
   a specified date
 
-  iex(1)> Chronos.Formatter.to_short_date({2012, 12, 21})
+  iex> Chronos.Formatter.to_short_date({2012, 12, 21})
   "2012-12-21"
+
   """
   def to_short_date(date), do: strftime(date, @short_date)
 
