@@ -13,9 +13,15 @@ defmodule Chronos.Formatter do
   "Presented on 12/21/2012"
 
   """
-  def strftime(date, f) do
-    format(String.split(f, %r{(%.?)}), date) |> Enum.join
+  def strftime({ date, time }, f)  do
+    call_format({ date, time }, f) |> Enum.join
   end
+
+  def strftime(date, f) do
+    call_format({ date, :erlang.time }, f) |> Enum.join
+  end
+
+  def call_format(date, f), do: format(String.split(f, %r{(%.?)}), date)
 
   @doc """
 
@@ -31,11 +37,24 @@ defmodule Chronos.Formatter do
   defp format([], _), do: []
   defp format([h|t], date), do: [apply_format(date, h)] ++ format(t, date)
 
-  defp apply_format({ y, m, d }, "%D"), do: strftime({ y, m, d }, "%m/%d/%Y")
-  defp apply_format({ y, _, _ }, "%Y"), do: to_binary(y)
-  defp apply_format({ y, _, _ }, "%y"), do: rem(y, 100) |> to_binary
-  defp apply_format({ _, m, _ }, "%m"), do: to_binary(m)
-  defp apply_format({ _, _, d }, "%d"), do: to_binary(d)
+  defp apply_format({{ y, m, d }, _time}, "%D") do
+    strftime({ y, m, d }, "%m/%d/%Y")
+  end
+
+  defp apply_format({{ y, _, _ }, _time}, "%Y"), do: to_binary(y)
+  defp apply_format({{ y, _, _ }, _time}, "%y"), do: rem(y, 100) |> to_binary
+  defp apply_format({{ _, m, _ }, _time}, "%m"), do: to_binary(m)
+  defp apply_format({{ _, _, d }, _time}, "%d"), do: to_binary(d)
+
+  defp apply_format({ _date, { h, _, _ }}, "%H"), do: to_binary(h)
+  defp apply_format({ _date, { _, m, _ }}, "%M"), do: to_binary(m)
+  defp apply_format({ _date, { _, _, s }}, "%S"), do: to_binary(s)
+
+  defp apply_format({ _date, { h, _, _ }}, "%P") when h < 12, do: "AM"
+  defp apply_format({ _date, { h, _, _ }}, "%p") when h < 12, do: "am"
+  defp apply_format({ _date, { h, _, _ }}, "%P") when h >= 12, do: "PM"
+  defp apply_format({ _date, { h, _, _ }}, "%p") when h >= 12, do: "pm"
+
   defp apply_format(_, f), do: f
 
 end
