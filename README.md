@@ -72,11 +72,12 @@ end
 ```
 If the date option is set the default date for all functions will be that date. 
 
-## Formatting Dates
+## Formatting Dates & Times
 
 With the addition of Chronos.Formatter, you can begin to format date tuples to something more readable.
 
 ```iex
+
 iex> Chronos.Formatter.strftime({2012, 12, 21}, "%Y-%m-%d")
 "2012-12-21"
 
@@ -85,8 +86,16 @@ iex> Chronos.Formatter.strftime({2012, 12, 21}, "Presented on %m/%d/%Y")
 
 ```
 
+Date/Times can also be formatted with the `strftime` function.
+
+```iex
+
+iex> Chronos.Formatter.strftime({{2012, 12, 21}, {13, 35, 44}}, "%Y-%m-%d %H:%M:%S")
+"2012-12-21 13:35:44"
+
+```
+
 ## Coming Soon
 
 * More date features like begining_of_week, end_of_week, 
 * More Time features
-* More Time Date formatting options
