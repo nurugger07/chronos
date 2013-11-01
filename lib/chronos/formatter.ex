@@ -41,14 +41,14 @@ defmodule Chronos.Formatter do
     strftime({ y, m, d }, "%m/%d/%Y")
   end
 
-  defp apply_format({{ y, _, _ }, _time}, "%Y"), do: to_binary(y)
-  defp apply_format({{ y, _, _ }, _time}, "%y"), do: rem(y, 100) |> to_binary
-  defp apply_format({{ _, m, _ }, _time}, "%m"), do: to_binary(m)
-  defp apply_format({{ _, _, d }, _time}, "%d"), do: to_binary(d)
+  defp apply_format({{ y, _, _ }, _time}, "%Y"), do: "#{y}"
+  defp apply_format({{ y, _, _ }, _time}, "%y"), do: "#{rem(y, 100)}"
+  defp apply_format({{ _, m, _ }, _time}, "%m"), do: "#{m}"
+  defp apply_format({{ _, _, d }, _time}, "%d"), do: "#{d}"
 
-  defp apply_format({ _date, { h, _, _ }}, "%H"), do: to_binary(h)
-  defp apply_format({ _date, { _, m, _ }}, "%M"), do: to_binary(m)
-  defp apply_format({ _date, { _, _, s }}, "%S"), do: to_binary(s)
+  defp apply_format({ _date, { h, _, _ }}, "%H"), do: "#{h}"
+  defp apply_format({ _date, { _, m, _ }}, "%M"), do: "#{m}"
+  defp apply_format({ _date, { _, _, s }}, "%S"), do: "#{s}"
 
   defp apply_format({ _date, { h, _, _ }}, "%P") when h < 12, do: "AM"
   defp apply_format({ _date, { h, _, _ }}, "%p") when h < 12, do: "am"
