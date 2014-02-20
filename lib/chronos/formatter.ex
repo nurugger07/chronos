@@ -21,7 +21,7 @@ defmodule Chronos.Formatter do
     call_format({ date, :erlang.time }, f) |> Enum.join
   end
 
-  def call_format(date, f), do: format(String.split(f, %r{(%.?)}), date)
+  def call_format(date, f), do: format(String.split(f, ~r{(%.?)}), date)
 
   @doc """
 
