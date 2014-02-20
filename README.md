@@ -1,3 +1,5 @@
+![Chronos](http://f.cl.ly/items/3W2Q0v2E3d0D0p412e1Z/7471443430_f127b84f8a_b.jpg)
+
 # Chronos
 
 An Elixir library for handling dates. Chronos can be used in both production and testing to quickly
