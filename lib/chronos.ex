@@ -3,7 +3,7 @@ defmodule Chronos do
   import Chronos.Validation
 
   @doc """
-    Chronos is an Elixir library for working with dates and times. 
+    Chronos is an Elixir library for working with dates and times.
 
     iex(1)> Chronos.today
     {2013, 8, 21}
@@ -22,7 +22,7 @@ defmodule Chronos do
     iex(2)> {2012, 12, 21} |> Chronos.year
     2012
   """
-  def year(date), do: validate(date) |> _extract_seg(:year)
+  def year(date \\ today), do: validate(date) |> _extract_seg(:year)
 
   @doc """
     The month function allows you to extract the month from a date tuple
@@ -33,7 +33,7 @@ defmodule Chronos do
     iex(2)> {2012, 12, 21} |> Chronos.month
     8
   """
-  def month(date), do: validate(date) |> _extract_seg(:month)
+  def month(date \\ today), do: validate(date) |> _extract_seg(:month)
 
   @doc """
     The day function allows you to extract the day from a date tuple
@@ -44,7 +44,24 @@ defmodule Chronos do
     iex(2)> {2012, 12, 21} |> Chronos.day
     21
   """
-  def day(date), do: validate(date) |> _extract_seg(:day)
+  def day(date \\ today), do: validate(date) |> _extract_seg(:day)
+
+  @doc """
+    The yday function allows you to extract the day of the year (1-366) from a
+    date tuple
+
+    iex(1)> Chronos.yday({2013, 8, 21})
+    233
+
+    iex(2)> {2012, 12, 21} |> Chronos.day
+    356
+  """
+  def yday(date \\ today) do
+    yd = validate(date)
+    |> _extract_seg(:year)
+    |> :calendar.date_to_gregorian_days(1,1)
+    :calendar.date_to_gregorian_days(date) - yd + 1
+  end
 
   @doc """
     The yesterday function is based on the current date
@@ -55,7 +72,7 @@ defmodule Chronos do
     or you can pass it a date:
 
     iex(2)> {2012, 12, 21} |> Chronos.yesterday
-    {2012, 12, 20} 
+    {2012, 12, 20}
 
   """
   def yesterday(date \\ :erlang.date), do: calculate_date_for_days(date, -1)
@@ -69,7 +86,7 @@ defmodule Chronos do
     or you can pass it a date:
 
     iex(2)> {2012, 12, 21} |> Chronos.tomorrow
-    {2012, 12, 22} 
+    {2012, 12, 22}
 
   """
   def tomorrow(date \\ :erlang.date), do: calculate_date_for_days(date, 1)
@@ -178,6 +195,8 @@ defmodule Chronos do
       def month(date), do: unquote(__MODULE__).month(date)
 
       def day(date), do: unquote(__MODULE__).day(date)
+
+      def yday(date), do: unquote(__MODULE__).yday(date)
 
       def yesterday(date \\ unquote(date.())) do
         unquote(__MODULE__).yesterday(date)

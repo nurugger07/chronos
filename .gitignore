@@ -5,3 +5,4 @@ erl_crash.dump
 expm
 package.exs
 /_build
+/docs
