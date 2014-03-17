@@ -4,6 +4,6 @@ defmodule Chronos.Mixfile do
   def project do
     [ app: :chronos,
       version: "0.2.0",
-      deps: [] ]
+      deps: [{ :ex_doc, github: "elixir-lang/ex_doc" }] ]
   end
 end

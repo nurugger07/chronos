@@ -29,6 +29,11 @@ defmodule ChronosTest do
     assert today |> day == _extract_seg(@today, :day)
   end
 
+  test :yday do
+    assert {2012, 1, 1} |> yday == 1
+    assert {2012, 2, 1} |> yday == 32
+  end
+
   test :yesterday do
     assert today |> yesterday == { 2012, 12, 20 }
     assert yesterday == { 2012, 12, 20 }
