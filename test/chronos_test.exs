@@ -17,6 +17,15 @@ defmodule ChronosTest do
     assert now == :calendar.now_to_datetime(:erlang.now)
   end
 
+  test :httpdate do
+    assert Chronos.httpdate("Sun, 06 Nov 1994 08:49:37 GMT") == {{1994, 11, 6},
+                                                                 {8, 49, 37}}
+    assert Chronos.httpdate("Sunday, 06-Nov-94 08:49:37 GMT") == {{1994, 11, 6},
+                                                                  {8, 49, 37}}
+    assert Chronos.httpdate("Sun Nov  6 08:49:37 1994") == {{1994, 11, 6},
+                                                            {8, 49, 37}}
+  end
+
   test :year do
     assert today |> year  == _extract_seg(@today, :year)
   end

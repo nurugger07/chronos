@@ -14,6 +14,86 @@ defmodule Chronos do
   def now, do: :erlang.now |> :calendar.now_to_datetime
 
   @doc """
+    Return a date/time tuple by parsing from a string according to some
+    [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+    format.
+  """
+  def httpdate(date) when is_binary(date) do
+    weekday = "(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)"
+    wkday = "(Mon|Tue|Wed|Thu|Fri|Sat|Sun)"
+    month = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+    date1 = "(?<day>\\d{2}) (?<month>#{month}) (?<year>\\d{4})"
+    date2 = "(?<day>\\d{2})-(?<month>#{month})-(?<year>\\d{2})"
+    date3 = "(?<month>#{month}) (?<day>(\\d{2}| \\d))"
+    time = "(?<hour>\\d{2}):(?<min>\\d{2}):(?<sec>\\d{2})"
+    rfc1123 = ~r/#{wkday}, #{date1} #{time} GMT/g
+    rfc850 = ~r/#{weekday}, #{date2} #{time} GMT/g
+    asctime = ~r/#{wkday} #{date3} #{time} (?<year>\d{4})/g
+    cond do
+      String.match?(date, rfc1123) ->
+        date = Regex.named_captures(rfc1123, date)
+        {
+          {
+            binary_to_integer(date[:year]),
+            month_name_to_number(date[:month]),
+            binary_to_integer(date[:day])
+          }, {
+            binary_to_integer(date[:hour]),
+            binary_to_integer(date[:min]),
+            binary_to_integer(date[:sec])
+          }
+        }
+      String.match?(date, rfc850) ->
+        date = Regex.named_captures(rfc850, date)
+        {
+          {
+            two_digit_year_to_full(binary_to_integer(date[:year])),
+            month_name_to_number(date[:month]),
+            binary_to_integer(date[:day])
+          }, {
+            binary_to_integer(date[:hour]),
+            binary_to_integer(date[:min]),
+            binary_to_integer(date[:sec])
+          }
+        }
+      String.match?(date, asctime) ->
+        date = Regex.named_captures(asctime, date)
+        {
+          {
+            binary_to_integer(date[:year]),
+            month_name_to_number(date[:month]),
+            binary_to_integer(String.strip(date[:day]))
+          }, {
+            binary_to_integer(date[:hour]),
+            binary_to_integer(date[:min]),
+            binary_to_integer(date[:sec])
+          }
+        }
+      true ->
+        raise ArgumentError, message: "String did not match RFC 2616"
+    end
+  end
+
+  defp two_digit_year_to_full(year) when year > 68 do
+    binary_to_integer("19#{year}")
+  end
+  defp two_digit_year_to_full(year) do
+    binary_to_integer("20#{year}")
+  end
+  defp month_name_to_number("Jan"), do: 1
+  defp month_name_to_number("Feb"), do: 2
+  defp month_name_to_number("Mar"), do: 3
+  defp month_name_to_number("Apr"), do: 4
+  defp month_name_to_number("May"), do: 5
+  defp month_name_to_number("Jun"), do: 6
+  defp month_name_to_number("Jul"), do: 7
+  defp month_name_to_number("Aug"), do: 8
+  defp month_name_to_number("Sep"), do: 9
+  defp month_name_to_number("Oct"), do: 10
+  defp month_name_to_number("Nov"), do: 11
+  defp month_name_to_number("Dec"), do: 12
+
+  @doc """
     The year function allows you to extract the year from a date tuple
 
     iex(1)> Chronos.year({2013, 8, 21})
