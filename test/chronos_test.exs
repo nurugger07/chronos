@@ -29,6 +29,24 @@ defmodule ChronosTest do
     assert today |> day == _extract_seg(@today, :day)
   end
 
+  test :wday do
+    assert {2013, 8, 21} |> wday == 3
+    assert {2013, 8, 18} |> sunday? == true
+    assert {2013, 8, 19} |> monday? == true
+    assert {2013, 8, 20} |> tuesday? == true
+    assert {2013, 8, 21} |> wednesday? == true
+    assert {2013, 8, 22} |> thursday? == true
+    assert {2013, 8, 23} |> friday? == true
+    assert {2013, 8, 24} |> saturday? == true
+    assert {2013, 8, 24} |> sunday? == false
+    assert {2013, 8, 24} |> monday? == false
+    assert {2013, 8, 24} |> tuesday? == false
+    assert {2013, 8, 24} |> wednesday? == false
+    assert {2013, 8, 24} |> thursday? == false
+    assert {2013, 8, 24} |> friday? == false
+    assert {2013, 8, 25} |> saturday? == false
+  end
+
   test :yday do
     assert {2012, 1, 1} |> yday == 1
     assert {2012, 2, 1} |> yday == 32
