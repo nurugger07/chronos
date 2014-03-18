@@ -89,7 +89,7 @@ defmodule Chronos do
     iex(2)> {2012, 12, 21} |> Chronos.yesterday
     {2012, 12, 20}
   """
-  def yesterday(date \\ :erlang.date), do: calculate_date_for_days(date, -1)
+  def yesterday(date \\ today), do: calculate_date_for_days(date, -1)
 
   @doc """
     The tomorrow function is based on the current date
@@ -102,7 +102,7 @@ defmodule Chronos do
     iex(2)> {2012, 12, 21} |> Chronos.tomorrow
     {2012, 12, 22}
   """
-  def tomorrow(date \\ :erlang.date), do: calculate_date_for_days(date, 1)
+  def tomorrow(date \\ today), do: calculate_date_for_days(date, 1)
 
   @doc """
     The following functions all have similar behavior. The days_ago/2 and weeks_ago/2
@@ -126,28 +126,28 @@ defmodule Chronos do
     iex(2)> Chronos.weeks_from(3)
     {2013, 9, 11}
   """
-  def days_ago(days, date \\ :erlang.date) when days > 0 do
+  def days_ago(days, date \\ today) when days > 0 do
     calculate_date_for_days(date, -days)
   end
   def days_ago(_, _) do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
-  def days_from(days, date \\ :erlang.date) when days > 0 do
+  def days_from(days, date \\ today) when days > 0 do
     calculate_date_for_days(date, days)
   end
   def days_from(_, _) do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
-  def weeks_ago(weeks, date \\ :erlang.date) when weeks > 0 do
+  def weeks_ago(weeks, date \\ today) when weeks > 0 do
     calculate_date_for_weeks(date, -weeks)
   end
   def weeks_ago(_, _) do
     raise ArgumentError, message: "Number of weeks must be a positive integer"
   end
 
-  def weeks_from(weeks, date \\ :erlang.date) when weeks > 0 do
+  def weeks_from(weeks, date \\ today) when weeks > 0 do
     calculate_date_for_weeks(date, weeks)
   end
   def weeks_from(_, _) do
