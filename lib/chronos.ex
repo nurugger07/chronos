@@ -7,7 +7,6 @@ defmodule Chronos do
 
     iex(1)> Chronos.today
     {2013, 8, 21}
-
   """
   def today, do: :erlang.date
 
@@ -47,6 +46,22 @@ defmodule Chronos do
   def day(date \\ today), do: validate(date) |> _extract_seg(:day)
 
   @doc """
+    Returns an integer representing the day of the week, 1..7, with Monday == 1.
+
+    iex(1)> Chronos.wday({2013, 8, 21})
+    3
+  """
+  def wday(date \\ today), do: :calendar.day_of_the_week(date)
+
+  def sunday?(date \\ today), do: wday(date) == 7
+  def monday?(date \\ today), do: wday(date) == 1
+  def tuesday?(date \\ today), do: wday(date) == 2
+  def wednesday?(date \\ today), do: wday(date) == 3
+  def thursday?(date \\ today), do: wday(date) == 4
+  def friday?(date \\ today), do: wday(date) == 5
+  def saturday?(date \\ today), do: wday(date) == 6
+
+  @doc """
     The yday function allows you to extract the day of the year (1-366) from a
     date tuple
 
@@ -73,7 +88,6 @@ defmodule Chronos do
 
     iex(2)> {2012, 12, 21} |> Chronos.yesterday
     {2012, 12, 20}
-
   """
   def yesterday(date \\ :erlang.date), do: calculate_date_for_days(date, -1)
 
@@ -87,7 +101,6 @@ defmodule Chronos do
 
     iex(2)> {2012, 12, 21} |> Chronos.tomorrow
     {2012, 12, 22}
-
   """
   def tomorrow(date \\ :erlang.date), do: calculate_date_for_days(date, 1)
 
@@ -195,6 +208,16 @@ defmodule Chronos do
       def month(date), do: unquote(__MODULE__).month(date)
 
       def day(date), do: unquote(__MODULE__).day(date)
+
+      def wday(date), do: unquote(__MODULE__).wday(date)
+
+      def sunday?(date), do: unquote(__MODULE__).sunday?(date)
+      def monday?(date), do: unquote(__MODULE__).monday?(date)
+      def tuesday?(date), do: unquote(__MODULE__).tuesday?(date)
+      def wednesday?(date), do: unquote(__MODULE__).wednesday?(date)
+      def thursday?(date), do: unquote(__MODULE__).thursday?(date)
+      def friday?(date), do: unquote(__MODULE__).friday?(date)
+      def saturday?(date), do: unquote(__MODULE__).saturday?(date)
 
       def yday(date), do: unquote(__MODULE__).yday(date)
 
