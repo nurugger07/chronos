@@ -46,6 +46,39 @@ defmodule Chronos do
   def day(date \\ today), do: validate(date) |> _extract_seg(:day)
 
   @doc """
+    The hour function allows you to extract the hour from a date/time tuple
+
+    iex> Chronos.hour({{2013, 8, 21}, {13, 34, 45}})
+    13
+
+    iex> {{2013, 8, 21}, {13, 34, 45}} |> Chronos.hour
+    13
+  """
+  def hour(datetime \\ now), do: validate(datetime) |> _extract_seg(:hour)
+
+  @doc """
+    The min function allows you to extract the minutes from a date/time tuple
+
+    iex> Chronos.min({{2013, 8, 21}, {13, 34, 45}})
+    34
+
+    iex> {{2013, 8, 21}, {13, 34, 45}} |> Chronos.min
+    34
+  """
+  def min(datetime \\ now), do: validate(datetime) |> _extract_seg(:min)
+
+  @doc """
+    The sec function allows you to extract the seconds from a date/time tuple
+
+    iex> Chronos.sec({{2013, 8, 21}, {13, 34, 45}})
+    45
+
+    iex> {{2013, 8, 21}, {13, 34, 45}} |> Chronos.sec
+    45
+  """
+  def sec(datetime \\ now), do: validate(datetime) |> _extract_seg(:sec)
+
+  @doc """
     Returns an integer representing the day of the week, 1..7, with Monday == 1.
 
     iex(1)> Chronos.wday({2013, 8, 21})
@@ -176,6 +209,9 @@ defmodule Chronos do
   defp _extract_seg({ year, _, _ }, :year), do: year
   defp _extract_seg({ _, month, _ }, :month), do: month
   defp _extract_seg({ _, _, day }, :day), do: day
+  defp _extract_seg({ date, {hour, _, _}}, :hour), do: hour
+  defp _extract_seg({ date, {_, min, _}}, :min), do: min
+  defp _extract_seg({ date, {_, _, sec}}, :sec), do: sec
 
   defp _opts_date({ :ok, date }), do: date
 
@@ -208,6 +244,12 @@ defmodule Chronos do
       def month(date), do: unquote(__MODULE__).month(date)
 
       def day(date), do: unquote(__MODULE__).day(date)
+
+      def hour(datetime), do: unquote(__MODULE__).hour(datetime)
+
+      def min(datetime), do: unquote(__MODULE__).min(datetime)
+
+      def sec(datetime), do: unquote(__MODULE__).sec(datetime)
 
       def wday(date), do: unquote(__MODULE__).wday(date)
 

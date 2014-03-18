@@ -6,6 +6,7 @@ defmodule ChronosTest do
   use ExUnit.Case
 
   @today { 2012, 12, 21 }
+  @now {{ 2012, 12, 21 }, {7, 23, 54}}
 
   import HourGlassFixture
 
@@ -18,7 +19,7 @@ defmodule ChronosTest do
   end
 
   test :year do
-    assert today |> year  == _extract_seg(@today, :year)
+    assert today |> year == _extract_seg(@today, :year)
   end
 
   test :month do
@@ -27,6 +28,18 @@ defmodule ChronosTest do
 
   test :day do
     assert today |> day == _extract_seg(@today, :day)
+  end
+
+  test :hour do
+    assert @now |> hour == 7
+  end
+
+  test :min do
+    assert @now |> min == 23
+  end
+
+  test :sec do
+    assert @now |> sec == 54
   end
 
   test :wday do
