@@ -126,7 +126,7 @@ defmodule Chronos.Formatter do
   end
 
   defp call_format(date, f) do
-    pattern = ~r{(%[0_^]?[YyCmBbhdHMSPpej])}
+    pattern = ~r{(%[0_^]?[DYyCmBbdHMSPpj])}
     format(String.split(f, pattern), date)
   end
 

@@ -11,6 +11,11 @@ defmodule FormatterTest do
     assert to_short_date(@today) == "2012-12-21"
   end
 
+  test :strftime_exceptions do
+    assert strftime(@today, "Date\n%D") == "Date\n12/21/2012"
+    assert strftime(@today, "Date%%D") == "Date%12/21/2012"
+  end
+
   test :strftime_dates do
     # Date
     assert strftime(@today, "%D") == "12/21/2012"
