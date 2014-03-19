@@ -1,0 +1,14 @@
+language: erlang
+script: MIX_ENV=test mix do clean, test
+otp_release:
+  - R16B03-1
+before_install:
+  - mkdir -p vendor/elixir
+  - git clone --quiet https://github.com/elixir-lang/elixir.git vendor/elixir
+  - cd vendor/elixir
+  - git checkout v0.12.5
+  - cd ../..
+  - make --quiet -C vendor/elixir > /dev/null 2>&1
+  - export PATH="$PATH:$PWD/vendor/elixir/bin"
+  - rm -rf deps
+  - MIX_ENV=test mix deps.get
