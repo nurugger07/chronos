@@ -1,6 +1,6 @@
 ![Chronos](http://f.cl.ly/items/3W2Q0v2E3d0D0p412e1Z/7471443430_f127b84f8a_b.jpg)
 
-# Chronos
+# Chronos [![Build Status](https://travis-ci.org/nurugger07/chronos.png?branch=master)](https://travis-ci.org/nurugger07/chronos)
 
 An Elixir library for handling dates. Chronos can be used in both production and testing to quickly
 determine a date.
@@ -21,7 +21,7 @@ To use the Chronos date features in your project you can import the Chronos modu
 
 ```elixir
 defmodule YourModule do
-  
+
   import Chronos
 
   def get_today do
@@ -72,7 +72,7 @@ defmodule TestingModule do
 end
 
 ```
-If the date option is set the default date for all functions will be that date. 
+If the date option is set the default date for all functions will be that date.
 
 ## Formatting Dates & Times
 
@@ -99,5 +99,5 @@ iex> Chronos.Formatter.strftime({{2012, 12, 21}, {13, 35, 44}}, "%Y-%m-%d %H:%M:
 
 ## Coming Soon
 
-* More date features like begining_of_week, end_of_week, 
+* More date features like begining_of_week, end_of_week,
 * More Time features
