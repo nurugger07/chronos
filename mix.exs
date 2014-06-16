@@ -6,9 +6,9 @@ defmodule Chronos.Mixfile do
   def project do
     [
       app: :chronos,
-      version: "0.3.0",
-      elixir: ">= 0.13.0",
-      deps: [{ :ex_doc, github: "elixir-lang/ex_doc" }],
+      version: "0.3.1",
+      elixir: ">= 0.14.0",
+      deps: [],
       package: [
         files: ["lib", "mix.exs", "README*", "LICENSE*"],
         contributors: ["Johnny Winn"],
