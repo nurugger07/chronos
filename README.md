@@ -11,7 +11,7 @@ You can add Chronos as a dependency in your `mix.exs` file. Since it only requir
 
 ```elixir
 def deps do
-  [ { :chronos, github: "nurugger07/chronos" } ]
+  [ { :chronos, '~> 0.3.2' } ]
 end
 ```
 
