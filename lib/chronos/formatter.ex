@@ -182,7 +182,9 @@ defmodule Chronos.Formatter do
 
   defp apply_format({ _date, { h, _, _ }}, "%H") when h < 10, do: "0#{h}"
   defp apply_format({ _date, { h, _, _ }}, "%H"), do: "#{h}"
+  defp apply_format({ _date, { _, m, _ }}, "%M") when m < 10, do: "0#{m}"
   defp apply_format({ _date, { _, m, _ }}, "%M"), do: "#{m}"
+  defp apply_format({ _date, { _, _, s }}, "%S") when s < 10, do: "0#{s}"
   defp apply_format({ _date, { _, _, s }}, "%S"), do: "#{s}"
 
   defp apply_format({ _date, { h, _, _ }}, "%P") when h < 12, do: "AM"

@@ -63,6 +63,12 @@ defmodule FormatterTest do
     assert strftime({ {2012, 12, 21}, { 1, 31, 45 } }, "%H") == "01"
     assert strftime(@now, "%M") == "31"
     assert strftime(@now, "%S") == "45"
+
+    earlier_still = {{2012, 12, 21}, {1, 2, 3}}
+    assert strftime(earlier_still, "%H") == "01"
+    assert strftime(earlier_still, "%M") == "02"
+    assert strftime(earlier_still, "%S") == "03"
+
   end
 
 end
