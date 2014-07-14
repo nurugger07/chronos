@@ -213,9 +213,9 @@ defmodule Chronos do
   defp _extract_seg({ year, _, _ }, :year), do: year
   defp _extract_seg({ _, month, _ }, :month), do: month
   defp _extract_seg({ _, _, day }, :day), do: day
-  defp _extract_seg({ date, {hour, _, _}}, :hour), do: hour
-  defp _extract_seg({ date, {_, min, _}}, :min), do: min
-  defp _extract_seg({ date, {_, _, sec}}, :sec), do: sec
+  defp _extract_seg({ _date, {hour, _, _}}, :hour), do: hour
+  defp _extract_seg({ _date, {_, min, _}}, :min), do: min
+  defp _extract_seg({ _date, {_, _, sec}}, :sec), do: sec
 
   defp _opts_date({ :ok, date }), do: date
 
