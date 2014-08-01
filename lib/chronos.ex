@@ -163,7 +163,7 @@ defmodule Chronos do
   def days_ago(days, date) when days > 0 do
     calculate_date_for_days(date, -days)
   end
-  def days_ago(_, _) do
+  def days_ago(days, _) when days < 0 do
     raise ArgumentError, message: "Number of days must be a positive integer"
   end
 
