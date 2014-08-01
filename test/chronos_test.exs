@@ -15,7 +15,7 @@ defmodule ChronosTest do
   end
 
   test :now do
-    assert now == :calendar.now_to_datetime(:erlang.now)
+    assert :calendar.now_to_datetime(:erlang.now) == now
   end
 
   test :year do
@@ -31,15 +31,15 @@ defmodule ChronosTest do
   end
 
   test :hour do
-    assert @now |> hour == 7
+    assert 7 == @now |> hour
   end
 
   test :min do
-    assert @now |> min == 23
+    assert 23 == @now |> min
   end
 
   test :sec do
-    assert @now |> sec == 54
+    assert 54 == @now |> sec
   end
 
   test :wday do
