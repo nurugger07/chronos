@@ -126,8 +126,12 @@ defmodule Chronos.Formatter do
   end
 
   defp call_format(date, f) do
-    pattern = ~r{(%[0_^]?[DYyCmBbdHMSPpj])}
-    format(String.split(f, pattern), date)
+    Regex.scan(~r{(%[0_^]?[DYyCmBbdHMSPpj])|(\w+\W?|\W)?}, f) |> reduce |> format(date)
+  end
+
+  defp reduce([]), do: []
+  defp reduce([h|t]) do
+    [List.foldr(h, "", fn(x, acc) -> acc = x end) | reduce(t)]
   end
 
   @doc """
