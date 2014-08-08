@@ -12,6 +12,9 @@ defmodule Chronos.Formatter do
   @abbr_monthnames [nil, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                          "Sep", "Oct", "Nov", "Dec"]
 
+  @flags String.to_char_list "0_^"
+  @conversions String.to_char_list "DYyCmBbdHMSPpj"
+
   @doc """
   The `strftime` formats date/time according to the directives in the given
   format string.
@@ -118,20 +121,41 @@ defmodule Chronos.Formatter do
   ```
   """
   def strftime({ date, time }, f)  do
-    call_format({ date, time }, f) |> Enum.join
+    call_format({ date, time }, f)
   end
 
   def strftime(date, f) do
-    call_format({ date, :erlang.time }, f) |> Enum.join
+    call_format({ date, :erlang.time }, f)
   end
 
   defp call_format(date, f) do
-    Regex.scan(~r{(%[0_^]?[DYyCmBbdHMSPpj])|(\w+\W?|\W)?}, f) |> reduce |> format(date)
+    format_chars(date, nil, String.to_char_list(f), "", "")
   end
 
-  defp reduce([]), do: []
-  defp reduce([h|t]) do
-    [List.foldr(h, "", fn(x, acc) -> acc = x end) | reduce(t)]
+  defp format_chars(_, _, [], token, acc), do: acc <> token
+
+  defp format_chars(date, nil, [h|t], _token, acc) when h == ?% do
+    format_chars(date, :flag_or_conversion, t, "%", acc)
+  end
+  defp format_chars(date, nil, [h|t], _token, acc) do
+    format_chars(date, nil, t, "", acc <> <<h>>)
+  end
+
+  defp format_chars(date, :flag_or_conversion, [h|t], token, acc) when h in @flags do
+    format_chars(date, :conversion, t, token <> <<h>>, acc)
+  end
+  defp format_chars(date, :flag_or_conversion, [h|t], token, acc) when h in @conversions do
+    format_chars(date, nil, t, "", acc <> apply_format(date, token <> <<h>>))
+  end
+  defp format_chars(date, :flag_or_conversion, [h|t], token, acc) do
+    format_chars(date, nil, [h|t], token, acc <> "%")
+  end
+
+  defp format_chars(date, :conversion, [h|t], token, acc) when h in @conversions do
+    format_chars(date, nil, t, "", acc <> apply_format(date, token <> <<h>>))
+  end
+  defp format_chars(date, :conversion, [h|t], token, acc) do
+    format_chars(date, nil, [h|t], "", acc <> token)
   end
 
   @doc """
@@ -145,9 +169,6 @@ defmodule Chronos.Formatter do
   ```
   """
   def to_short_date(date), do: strftime(date, @short_date)
-
-  defp format([], _), do: []
-  defp format([h|t], date), do: [apply_format(date, h)] ++ format(t, date)
 
   defp apply_format({{ y, m, d }, _time}, "%D") do
     strftime({ y, m, d }, "%m/%d/%Y")

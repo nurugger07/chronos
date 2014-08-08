@@ -14,6 +14,8 @@ defmodule FormatterTest do
   test :strftime_exceptions do
     assert strftime(@today, "Date\n%D") == "Date\n12/21/2012"
     assert strftime(@today, "Date%%D") == "Date%12/21/2012"
+    assert strftime(@today, "Date%n%D") == "Date%n12/21/2012"
+    assert strftime(@today, "Date%0n%%D") == "Date%0n%12/21/2012"
   end
 
   test :strftime_dates do
@@ -69,6 +71,10 @@ defmodule FormatterTest do
     assert strftime(earlier_still, "%M") == "02"
     assert strftime(earlier_still, "%S") == "03"
 
+  end
+
+  test :strftime_compact_letters do
+    assert strftime(@now, "%Y-%0m-%0dT%H:%M:%S.000Z") == "2012-12-21T13:31:45.000Z"
   end
 
 end
