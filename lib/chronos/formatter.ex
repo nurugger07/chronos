@@ -139,7 +139,7 @@ defmodule Chronos.Formatter do
 
   ```
   iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }})
-  "Fri, 21 Dec 2012 18:31:45 -0000"
+  "Fri, 21 Dec 2012 18:31:45 GMT"
   ```
 
   Additional options include RFC 850 (obsoleted by RFC 1036) and asctime() format

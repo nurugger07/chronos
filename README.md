@@ -97,6 +97,25 @@ iex> Chronos.Formatter.strftime({{2012, 12, 21}, {13, 35, 44}}, "%Y-%m-%d %H:%M:
 
 ```
 
+Chronos will also build valid http dates.
+
+The default format is for RFC 1123:
+
+``` iex
+iex> Chronos.Formatter.http_date({{2012, 12, 21}, {13, 35, 44}})
+"Fri, 21 Dec 2012 18:31:45 GMT"
+```
+
+However, there is also support for RFC 850 & ANSI C's asctime() format
+
+```
+iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :rfc850)
+"Friday, 21-Dec-2012 18:31:45 GMT"
+
+iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :asctime)
+"Fri Dec 21 18:31:45 2012"
+```
+
 ## Coming Soon
 
 * More date features like begining_of_week, end_of_week,
