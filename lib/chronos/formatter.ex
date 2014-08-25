@@ -12,8 +12,12 @@ defmodule Chronos.Formatter do
   @abbr_monthnames [nil, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                          "Sep", "Oct", "Nov", "Dec"]
 
+  @daynames [nil, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+  @abbr_daynames [nil, "Mon", "Tue", "Wed", "Thru", "Fri", "Sat", "Sun"]
+
   @flags String.to_char_list "0_^"
-  @conversions String.to_char_list "DYyCmBbdHMSPpj"
+  @conversions String.to_char_list "AaDYyCmBbdHMSPpj"
 
   @doc """
   The `strftime` formats date/time according to the directives in the given
@@ -128,6 +132,43 @@ defmodule Chronos.Formatter do
     call_format({ date, :erlang.time }, f)
   end
 
+  @doc """
+
+  The `http_date` function applies the default format for RFC 822 on
+  a specified date. (RFC 822, updated by RFC 1123)
+
+  ```
+  iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }})
+  "Fri, 21 Dec 2012 18:31:45 -0000"
+  ```
+
+  Additional options include RFC 850 (obsoleted by RFC 1036) and asctime() format
+
+  ```
+  iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :rfc850)
+  "Friday, 21-Dec-2012 18:31:45 GMT"
+
+  iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :asctime)
+  "Fri Dec 21 18:31:45 2012"
+  ```
+
+  """
+  def http_date(date_time) do
+    date_time |> universal_datetime |> strftime("%a, %d %b %Y %H:%M:%S GMT")
+  end
+
+  def http_date(date_time, :rfc850) do
+    date_time |> universal_datetime |> strftime("%A, %d-%b-%Y %H:%M:%S GMT")
+  end
+
+  def http_date(date_time, :asctime) do
+    date_time |> universal_datetime |> strftime("%a %b %d %H:%M:%S %Y")
+  end
+
+  defp universal_datetime(date_time) do
+    :calendar.local_time_to_universal_time_dst(date_time) |> Enum.at(0)
+  end
+
   defp call_format(date, f) do
     format_chars(date, nil, String.to_char_list(f), "", "")
   end
@@ -195,6 +236,22 @@ defmodule Chronos.Formatter do
 
   defp apply_format({{ _, m, _ }, _time}, "%^b") do
     @abbr_monthnames |> Enum.at(m) |> String.upcase
+  end
+
+  defp apply_format({date, _time}, "%a") do
+    @abbr_daynames |> Enum.at(:calendar.day_of_the_week(date))
+  end
+
+  defp apply_format(date, "%^a") do
+    apply_format(date, "%a") |> String.upcase
+  end
+
+  defp apply_format({date, _time}, "%A") do
+    @daynames |> Enum.at(:calendar.day_of_the_week(date))
+  end
+
+  defp apply_format(date, "%^A") do
+    apply_format(date, "%A") |> String.upcase
   end
 
   defp apply_format({{ _, _, d }, _time}, "%0d") when d < 10, do: "0#{d}"

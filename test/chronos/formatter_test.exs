@@ -70,7 +70,12 @@ defmodule FormatterTest do
     assert strftime(earlier_still, "%H") == "01"
     assert strftime(earlier_still, "%M") == "02"
     assert strftime(earlier_still, "%S") == "03"
+  end
 
+  test :httpdate do
+    assert http_date(@now) == "Fri, 21 Dec 2012 18:31:45 GMT"
+    assert http_date(@now, :rfc850) == "Friday, 21-Dec-2012 18:31:45 GMT"
+    assert http_date({{1994, 11, 6}, { 3, 49, 37}}, :asctime) == "Sun Nov 6 08:49:37 1994"
   end
 
   test :strftime_compact_letters do
