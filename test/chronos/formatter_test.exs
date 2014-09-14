@@ -73,9 +73,14 @@ defmodule FormatterTest do
   end
 
   test :httpdate do
-    assert http_date(@now) == "Fri, 21 Dec 2012 18:31:45 GMT"
-    assert http_date(@now, :rfc850) == "Friday, 21-Dec-2012 18:31:45 GMT"
-    assert http_date({{1994, 11, 6}, { 3, 49, 37}}, :asctime) == "Sun Nov 6 08:49:37 1994"
+    universal_datetime = :calendar.local_time_to_universal_time_dst(@now) |> Enum.at(0)
+    # Fri, 21 Dec 2012 18:31:45 GMT
+    assert http_date(@now) == strftime(universal_datetime, "%a, %d %b %Y %H:%M:%S GMT")
+    # Friday, 21-Dec-2012 18:31:45 GMT
+    assert http_date(@now, :rfc850) == strftime(universal_datetime, "%A, %d-%b-%Y %H:%M:%S GMT")
+    # Sun Nov 6 08:49:37 1994
+    universal_datetime = :calendar.local_time_to_universal_time_dst({{1994, 11, 6}, { 3, 49, 37}}) |> Enum.at(0)
+    assert http_date({{1994, 11, 6}, { 3, 49, 37}}, :asctime) == strftime(universal_datetime, "%a %b %d %H:%M:%S %Y")
   end
 
   test :strftime_compact_letters do
