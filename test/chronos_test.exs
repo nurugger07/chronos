@@ -119,6 +119,12 @@ defmodule ChronosTest do
     end
   end
 
+  test :beginning_of_week do
+    assert beginning_of_week(@today) == {2012,12,17}
+    assert beginning_of_week({2015,1,20}) == {2015,1,19}
+    assert beginning_of_week({2015,1,20},3) == {2015,1,14}
+  end
+
   defp _extract_seg({ year, _, _ }, :year), do: year
   defp _extract_seg({ _, month, _ }, :month), do: month
   defp _extract_seg({ _, _, day }, :day), do: day
