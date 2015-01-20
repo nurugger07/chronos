@@ -136,6 +136,44 @@ defmodule Chronos do
     {2012, 12, 22}
   """
   def tomorrow(date \\ today), do: calculate_date_for_days(date, 1)
+  @doc """
+    #beginning_of_week/2 function returns the date of starting day of the week for given date.
+    It defaults to today for given date and Monday(1) for starting day of the week.
+    Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+    If today is {2012,12,21}
+    iex(1)> Chronos.beginning_of_week
+    {2012,12,17}
+    iex(2)> Chronos.beginning_of_week({2015,1,20})
+    {2015,1,19}
+    iex(3)> Chronos.beginning_of_week({2015,1,20},3)
+    {2015,1,14}
+  """
+  def beginning_of_week(date \\ today, start_day \\ 1) do
+    days = [1,2,3,4,5,6,7]
+    offset = start_day- 1
+    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse) 
+           ++ (days |> Enum.take(offset)) #list rotation hack
+    Enum.find_index(days,&(&1 == wday(date))) |> days_ago(date)     
+  end
+  @doc """
+    #end_of_week/2 function returns the date of starting day of the week for given date.
+    It defaults to today for given date and Sunday(7) for ending day of the week.
+    Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+    If today is {2012,12,21}
+    iex(1)> Chronos.end_of_week
+    {2012,12,23}
+    iex(2)> Chronos.end_of_week({2015,1,20})
+    {2015,1,25}
+    iex(3)> Chronos.end_of_week({2015,1,20},3)
+    {2015,1,21}
+  """
+  def end_of_week(date \\ today, end_day \\ 7) do
+    days = [1,2,3,4,5,6,7]
+    offset = wday(date)- 1
+    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse) 
+           ++ (days |> Enum.take(offset)) #list rotation hack
+    Enum.find_index(days,&(&1 == end_day)) |> days_from(date)     
+  end
 
   @doc """
     The following functions all have similar behavior. The days_ago/2 and weeks_ago/2
@@ -289,6 +327,13 @@ defmodule Chronos do
 
       def weeks_from(weeks, date \\ unquote(date.())) do
         unquote(__MODULE__).weeks_from(weeks, date)
+      end
+
+      def beginning_of_week(date \\ unquote(date.()),start_day \\ 1) do
+        unquote(__MODULE__).beginning_of_week(date, start_day)
+      end
+      def end_of_week(date \\ unquote(date.()),end_day \\ 7) do
+        unquote(__MODULE__).end_of_week(date, end_day)
       end
     end
   end
