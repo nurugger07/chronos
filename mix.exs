@@ -6,7 +6,7 @@ defmodule Chronos.Mixfile do
   def project do
     [
       app: :chronos,
-      version: "0.3.9",
+      version: "1.0.0",
       elixir: ">= 1.0.0",
       deps: [],
       package: [

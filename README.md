@@ -11,7 +11,15 @@ You can add Chronos as a dependency in your `mix.exs` file. Since it only requir
 
 ```elixir
 def deps do
-  [ { :chronos, '~> 0.3.5' } ]
+  [ { :chronos, '~> 1.0.0' } ]
+end
+```
+
+If you aren't using hex, add the a reference to the github repo.
+
+``` elixir
+def deps do
+  [ { :chronos, github: "nurugger07/chronos" } ]
 end
 ```
 
@@ -115,8 +123,3 @@ iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :rfc850)
 iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :asctime)
 "Fri Dec 21 18:31:45 2012"
 ```
-
-## Coming Soon
-
-* More date features like begining_of_week, end_of_week,
-* More Time features
