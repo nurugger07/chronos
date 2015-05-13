@@ -17,7 +17,7 @@ defmodule Chronos.Formatter do
   @abbr_daynames [nil, "Mon", "Tue", "Wed", "Thru", "Fri", "Sat", "Sun"]
 
   @flags String.to_char_list "0_^"
-  @conversions String.to_char_list "AaDYyCmBbdHMSPpj"
+  @conversions String.to_char_list "AaDYyCmBbdHMSPpjf"
 
   @doc """
   The `strftime` formats date/time according to the directives in the given
@@ -277,6 +277,20 @@ defmodule Chronos.Formatter do
   defp apply_format({ _date, { h, _, _ }}, "%p") when h < 12, do: "am"
   defp apply_format({ _date, { h, _, _ }}, "%P") when h >= 12, do: "PM"
   defp apply_format({ _date, { h, _, _ }}, "%p") when h >= 12, do: "pm"
+
+  defp apply_format({ _date, { h, _, _, _ }}, "%H") when h < 10, do: "0#{h}"
+  defp apply_format({ _date, { h, _, _, _ }}, "%H"), do: "#{h}"
+  defp apply_format({ _date, { _, m, _, _ }}, "%M") when m < 10, do: "0#{m}"
+  defp apply_format({ _date, { _, m, _, _ }}, "%M"), do: "#{m}"
+  defp apply_format({ _date, { _, _, s, _ }}, "%S") when s < 10, do: "0#{s}"
+  defp apply_format({ _date, { _, _, s, _ }}, "%S"), do: "#{s}"
+  defp apply_format({ _date, { _, _, _, f }}, "%f") when f < 10, do: "0#{f}"
+  defp apply_format({ _date, { _, _, _, f }}, "%f"), do: "#{f}"
+
+  defp apply_format({ _date, { h, _, _, _ }}, "%P") when h < 12, do: "AM"
+  defp apply_format({ _date, { h, _, _, _ }}, "%p") when h < 12, do: "am"
+  defp apply_format({ _date, { h, _, _, _ }}, "%P") when h >= 12, do: "PM"
+  defp apply_format({ _date, { h, _, _, _ }}, "%p") when h >= 12, do: "pm"
 
   defp apply_format(_, f), do: f
 end

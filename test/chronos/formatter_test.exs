@@ -4,6 +4,7 @@ defmodule FormatterTest do
   @today { 2012, 12, 21 }
   @new_year { 2012, 1, 1 }
   @now { {2012, 12, 21}, { 13, 31, 45 } }
+  @now_with_ms { {2012, 12, 21}, { 13, 31, 45, 12223 } }
 
   import Chronos.Formatter
 
@@ -70,6 +71,16 @@ defmodule FormatterTest do
     assert strftime(earlier_still, "%H") == "01"
     assert strftime(earlier_still, "%M") == "02"
     assert strftime(earlier_still, "%S") == "03"
+  end
+
+  test :strftime_date_times_with_ms do
+    assert strftime(@now_with_ms, "%m/%d/%Y %H:%M:%S %P") == "12/21/2012 13:31:45 PM"
+    assert strftime(@now_with_ms, "%m/%d/%Y %H:%M:%S %p") == "12/21/2012 13:31:45 pm"
+
+    assert strftime(@now_with_ms, "%H") == "13"
+    assert strftime(@now_with_ms, "%M") == "31"
+    assert strftime(@now_with_ms, "%S") == "45"
+    assert strftime(@now_with_ms, "%f") == "12223"
   end
 
   test :httpdate do
