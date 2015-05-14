@@ -14,7 +14,7 @@ defmodule Chronos.Formatter do
 
   @daynames [nil, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-  @abbr_daynames [nil, "Mon", "Tue", "Wed", "Thru", "Fri", "Sat", "Sun"]
+  @abbr_daynames [nil, "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
   @flags String.to_char_list "0_^"
   @conversions String.to_char_list "AaDYyCmBbdHMSPpjf"
