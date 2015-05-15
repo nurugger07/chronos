@@ -2,6 +2,8 @@ defmodule Chronos do
 
   import Chronos.Validation
 
+  @datetime1970 {{1970, 1, 1}, {0, 0, 0}}
+
   @doc """
     Chronos is an Elixir library for working with dates and times.
 
@@ -11,6 +13,19 @@ defmodule Chronos do
   def today, do: :erlang.date
 
   def now, do: :erlang.now |> :calendar.now_to_datetime
+
+  @doc """
+    The epoch_time/1 function returns the number of seconds since January 1, 1970 00:00:00.
+    If the date is prior to January 1, the integer will be negative.
+
+    iex(1)> Chronos.epoch_time({2012, 12, 21}, {12, 30, 55}}
+  """
+  def epoch_time({y, m, d}), do: epoch_time {{y, m, d}, {0,0,0}}
+  def epoch_time(datetime) do
+    datetime_to_seconds(datetime) - datetime_to_seconds(@datetime1970)
+  end
+
+  def datetime_to_seconds(datetime), do: :calendar.datetime_to_gregorian_seconds(datetime)
 
   @doc """
     The year function allows you to extract the year from a date tuple
@@ -280,6 +295,8 @@ defmodule Chronos do
       def today, do: unquote(date.())
 
       def now, do: unquote(__MODULE__).now
+
+      def epoch_time(datetime), do: unquote(__MODULE__).epoch_time(datetime)
 
       def year(date), do: unquote(__MODULE__).year(date)
 

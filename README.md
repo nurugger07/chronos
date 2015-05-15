@@ -11,7 +11,7 @@ You can add Chronos as a dependency in your `mix.exs` file. Since it only requir
 
 ```elixir
 def deps do
-  [ { :chronos, '~> 1.2.0' } ]
+  [ { :chronos, '~> 1.3.0' } ]
 end
 ```
 
@@ -51,6 +51,7 @@ end
 There are a number of functions to help with dates including below are some of the current APIs:
 
 ```iex
+
 # yesterday without a date assumes you want the day before the current date
 # current date is {2012, 12, 21}
 iex> Chronos.yesterday
@@ -58,6 +59,14 @@ iex> Chronos.yesterday
 
 iex> Chronos.tomorrow
 {2012, 12, 22}
+
+# epoch time can be return. If a time is not specified then midnight is assumed
+iex> Chronos.epoch_time {2012, 12, 21}
+1356048000
+
+iex> Chronos.epoch_time {{2012, 12, 21}, {11, 11, 0}}
+1356088260
+
 ```
 
 You can find the date for days or weeks in the past or future:
@@ -116,7 +125,7 @@ iex> Chronos.Formatter.http_date({{2012, 12, 21}, {13, 35, 44}})
 
 However, there is also support for RFC 850 & ANSI C's asctime() format
 
-```
+``` iex
 iex> Chronos.Formatter.http_date({{2012, 12, 21}, { 13, 31, 45 }}, :rfc850)
 "Friday, 21-Dec-2012 18:31:45 GMT"
 

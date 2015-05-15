@@ -18,6 +18,16 @@ defmodule ChronosTest do
     assert :calendar.now_to_datetime(:erlang.now) == now
   end
 
+  test :epoch_time do
+    # End of the Mayan calendar December 21, 2012
+    assert 1356088260 == epoch_time {{2012, 12, 21}, { 11, 11, 0}}
+    assert 1356048000 == epoch_time {{2012, 12, 21}, { 0, 0 ,0}}
+    assert 1356048000 == epoch_time {2012, 12, 21}
+    # First Stooges album release date August 5, 1969
+    assert -12873600 == epoch_time {{1969, 8, 5}, { 0, 0, 0}}
+    assert -12873600 == epoch_time {1969, 8, 5}
+  end
+
   test :year do
     assert today |> year == _extract_seg(@today, :year)
   end
