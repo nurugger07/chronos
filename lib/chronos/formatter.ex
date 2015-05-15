@@ -1,4 +1,7 @@
 defmodule Chronos.Formatter do
+
+  import Chronos.Timezones
+
   @moduledoc """
     The Chronos.Formatter module is used to format date/time tuples.
   """
@@ -163,6 +166,14 @@ defmodule Chronos.Formatter do
 
   def http_date(date_time, :asctime) do
     date_time |> universal_datetime |> strftime("%a %b %d %H:%M:%S %Y")
+  end
+
+  @doc """
+
+  """
+  def iso8601(date_time), do: date_time |> strftime("%Y-%0m-%0dT%H:%M:%SZ")
+  def iso8601(date_time, timezone) do
+    strftime(date_time, "%Y-%0m-%0dT%H:%M:%S") <> offset(timezone)
   end
 
   defp universal_datetime(date_time) do

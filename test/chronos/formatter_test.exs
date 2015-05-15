@@ -94,6 +94,11 @@ defmodule FormatterTest do
     assert http_date({{1994, 11, 6}, { 3, 49, 37}}, :asctime) == strftime(universal_datetime, "%a %b %d %H:%M:%S %Y")
   end
 
+  test :iso8601 do
+    assert iso8601(@now) == "2012-12-21T13:31:45Z"
+    assert iso8601(@now, "CST") == "2012-12-21T13:31:45-6:00"
+  end
+
   test :strftime_compact_letters do
     assert strftime(@now, "%Y-%0m-%0dT%H:%M:%S.000Z") == "2012-12-21T13:31:45.000Z"
   end
