@@ -213,35 +213,35 @@ defmodule Chronos do
     {2013, 9, 11}
   """
   def days_ago(days, date \\ today)
-  def days_ago(days, date) when days > 0 do
+  def days_ago(days, date) when days >= 0 do
     calculate_date_for_days(date, -days)
   end
   def days_ago(days, _) when days < 0 do
-    raise ArgumentError, message: "Number of days must be a positive integer"
+    raise ArgumentError, message: "Number of days must be zero or greater"
   end
 
   def days_from(days, date \\ today)
-  def days_from(days, date) when days > 0 do
+  def days_from(days, date) when days >= 0 do
     calculate_date_for_days(date, days)
   end
   def days_from(_, _) do
-    raise ArgumentError, message: "Number of days must be a positive integer"
+    raise ArgumentError, message: "Number of days must be zero or greater"
   end
 
   def weeks_ago(weeks, date \\ today)
-  def weeks_ago(weeks, date) when weeks > 0 do
+  def weeks_ago(weeks, date) when weeks >= 0 do
     calculate_date_for_weeks(date, -weeks)
   end
   def weeks_ago(_, _) do
-    raise ArgumentError, message: "Number of weeks must be a positive integer"
+    raise ArgumentError, message: "Number of weeks must be zero or greater"
   end
 
   def weeks_from(weeks, date \\ today)
-  def weeks_from(weeks, date) when weeks > 0 do
+  def weeks_from(weeks, date) when weeks >= 0 do
     calculate_date_for_weeks(date, weeks)
   end
   def weeks_from(_, _) do
-    raise ArgumentError, message: "Number of weeks must be a positive integer"
+    raise ArgumentError, message: "Number of weeks must be zero or greater"
   end
 
   defp calculate_date_for_days(date, days) do

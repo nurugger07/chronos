@@ -92,11 +92,12 @@ defmodule ChronosTest do
   test :days_ago do
     assert 10 |> days_ago == { 2012, 12, 11 }
     assert 3 |> days_ago({ 2013, 1, 1 }) == { 2012, 12, 29 }
+    assert 0 |> days_ago == { 2012, 12, 21 }
 
-    assert_raise ArgumentError, "Number of days must be a positive integer", fn ->
+    assert_raise ArgumentError, "Number of days must be zero or greater", fn ->
       days_ago(-3, @today)
     end
-    assert_raise ArgumentError, "Number of days must be a positive integer", fn ->
+    assert_raise ArgumentError, "Number of days must be zero or greater", fn ->
       days_ago(-2)
     end
   end
@@ -104,18 +105,20 @@ defmodule ChronosTest do
   test :days_from do
     assert 10 |> days_from(@today) == { 2012, 12, 31 }
     assert 11 |> days_from(@today) == { 2013, 1, 1 }
+    assert 0 |> days_from(@today) == { 2012, 12, 21 }
 
-    assert_raise ArgumentError, "Number of days must be a positive integer", fn ->
+    assert_raise ArgumentError, "Number of days must be zero or greater", fn ->
       days_from(-3, @today)
     end
   end
 
   test :weeks_ago do
     assert 1 |> weeks_ago == { 2012, 12, 14 }
+    assert 0 |> weeks_ago == { 2012, 12, 21 }
     assert 2 |> weeks_ago == { 2012, 12, 7 }
     assert 1 |> weeks_ago({ 2013, 1, 1 }) == { 2012, 12, 25 }
 
-    assert_raise ArgumentError, "Number of weeks must be a positive integer", fn ->
+    assert_raise ArgumentError, "Number of weeks must be zero or greater", fn ->
       weeks_ago(-3, @today)
     end
   end
@@ -123,8 +126,9 @@ defmodule ChronosTest do
   test :weeks_from do
     assert 1 |> weeks_from == { 2012, 12, 28 }
     assert 2 |> weeks_from == { 2013, 1, 4 }
+    assert 0 |> weeks_from == { 2012, 12, 21 }
 
-    assert_raise ArgumentError, "Number of weeks must be a positive integer", fn ->
+    assert_raise ArgumentError, "Number of weeks must be zero or greater", fn ->
       weeks_from(-3, @today)
     end
   end
@@ -132,6 +136,7 @@ defmodule ChronosTest do
   test :beginning_of_week do
     assert beginning_of_week(@today) == {2012,12,17}
     assert beginning_of_week({2015,1,20}) == {2015,1,19}
+    assert beginning_of_week({2015,1,19}) == {2015,1,19}
     assert beginning_of_week({2015,1,20},3) == {2015,1,14}
   end
   test :end_of_week do
