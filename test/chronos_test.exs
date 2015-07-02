@@ -15,7 +15,7 @@ defmodule ChronosTest do
   end
 
   test :now do
-    assert :calendar.now_to_datetime(:erlang.now) == now
+    assert :calendar.now_to_datetime(:os.timestamp) == now
   end
 
   test :epoch_time do
