@@ -12,7 +12,7 @@ defmodule Chronos do
   """
   def today, do: :erlang.date
 
-  def now, do: :os.timestamp |> :calendar.now_to_datetime
+  def now, do: :erlang.now |> :calendar.now_to_datetime
 
   @doc """
     The epoch_time/1 function returns the number of seconds since January 1, 1970 00:00:00.
@@ -166,9 +166,9 @@ defmodule Chronos do
   def beginning_of_week(date \\ today, start_day \\ 1) do
     days = [1,2,3,4,5,6,7]
     offset = start_day- 1
-    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse)
+    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse) 
            ++ (days |> Enum.take(offset)) #list rotation hack
-    Enum.find_index(days,&(&1 == wday(date))) |> days_ago(date)
+    Enum.find_index(days,&(&1 == wday(date))) |> days_ago(date)     
   end
   @doc """
     #end_of_week/2 function returns the date of starting day of the week for given date.
@@ -185,9 +185,9 @@ defmodule Chronos do
   def end_of_week(date \\ today, end_day \\ 7) do
     days = [1,2,3,4,5,6,7]
     offset = wday(date)- 1
-    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse)
+    days = (days |> Enum.reverse |> Enum.take(7-offset) |> Enum.reverse) 
            ++ (days |> Enum.take(offset)) #list rotation hack
-    Enum.find_index(days,&(&1 == end_day)) |> days_from(date)
+    Enum.find_index(days,&(&1 == end_day)) |> days_from(date)     
   end
 
   @doc """
