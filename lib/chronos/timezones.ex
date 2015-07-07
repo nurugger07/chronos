@@ -14,11 +14,22 @@ defmodule Chronos.Timezones do
     { "AFT", "Afghanistan Time", "+4:30" },
     { "AKDT", "Alaska Daylight Time", "-8:00" },
     { "AKST", "Alaska Standard Time", "-9:00" },
+    { "CET", "Central European Time", "+1:00" },
     { "CST", "Central Standard Time", "-6:00" },
+    { "EET", "Eastern European Time", "+2:00" },
     { "EST", "Eastern Standard Time", "-5:00" },
+    { "IRDT", "Iran Daylight Time", "+4:30" },
+    { "IRST", "Iran Standard Time", "+3:30" },
+    { "IST", "India Standard Time", "+5:30" },
     { "GMT", "Greenwich Mean Time", "+0:00" },
+    { "JST", "Japan Standard Time", "+9:00" },
+    { "MSD", "Moscow Daylight Time", "+4:00" },
+    { "MSK", "Moscow Standard Time", "+3:00" },
     { "MST", "Mountain Standard Time", "-7:00" },
     { "PST", "Pacific Standard Time", "-8:00" },
+    { "SGT", "Singapore Time", "+8:00" },
+    { "WET", "Western European Time", "+0:00" },
+    { "WEST", "Western European Summer Time", "+1:00" },
   ]
 
   @doc """
