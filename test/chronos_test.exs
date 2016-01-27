@@ -28,6 +28,11 @@ defmodule ChronosTest do
     assert -12873600 == epoch_time {1969, 8, 5}
   end
 
+  test :from_epoch_time do
+    assert {{2012,12,21}, {11,11,0}} == from_epoch_time 1356088260
+    assert {{2012,12,21}, {0,0,0}} == from_epoch_time 1356048000
+  end
+
   test :year do
     assert today |> year == _extract_seg(@today, :year)
   end
