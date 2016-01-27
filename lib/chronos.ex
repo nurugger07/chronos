@@ -26,6 +26,17 @@ defmodule Chronos do
   end
 
   def datetime_to_seconds(datetime), do: :calendar.datetime_to_gregorian_seconds(datetime)
+  
+  @doc """
+    The from_epoch_time/1 function converts from epoch time to datetime tuple.
+
+    iex(1)> Chronos.from_epoch_time(1356048000)
+  """ 
+  def from_epoch_time(timestamp) do
+    timestamp 
+     |> +(datetime_to_seconds(@datetime1970))
+     |> :calendar.gregorian_seconds_to_datetime
+  end
 
   @doc """
     The year function allows you to extract the year from a date tuple
@@ -298,6 +309,8 @@ defmodule Chronos do
 
       def epoch_time(datetime), do: unquote(__MODULE__).epoch_time(datetime)
 
+      def from_epoch_time(timestamp), do: unquote(__MODULE__).from_epoch_time(timestamp)
+      
       def year(date), do: unquote(__MODULE__).year(date)
 
       def month(date), do: unquote(__MODULE__).month(date)
