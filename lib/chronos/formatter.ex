@@ -237,10 +237,6 @@ defmodule Chronos.Formatter do
   defp apply_format({{ _, m, _ }, _time}, "%0m"), do: "#{m}"
   defp apply_format({{ _, m, _ }, _time}, "%B"), do: @monthnames |> Enum.at(m)
 
-  defp apply_format({{_, m, _}, _time}, "%B") do
-    @monthnames |> Enum.at(m)
-  end
-
   defp apply_format(date, "%^B") do
     apply_format(date, "%B") |> String.upcase
   end
