@@ -34,7 +34,7 @@ defmodule Chronos do
   """ 
   def from_epoch_time(timestamp) do
     timestamp 
-     |> +(datetime_to_seconds(@datetime1970))
+     |> Kernel.+(datetime_to_seconds(@datetime1970))
      |> :calendar.gregorian_seconds_to_datetime
   end
 
