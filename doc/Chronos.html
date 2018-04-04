@@ -1,0 +1,1188 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.18.3">
+    <title>Chronos – Chronos v1.8.0</title>
+    <link rel="stylesheet" href="dist/app-480ffdc169.css" />
+    
+    <script src="dist/sidebar_items-bcaee97324.js"></script>
+    
+    
+    
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Chronos
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v1.8.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Chronos v1.8.0</small>
+        Chronos
+        
+          <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#__using__/1">__using__(opts \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>There is an option to supply a date. This is handy for testing</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#beginning_of_week/2">beginning_of_week(date \\ today(), start_day \\ 1)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>#beginning_of_week/2 function returns the date of starting day of the week for given date.
+  It defaults to today for given date and Monday(1) for starting day of the week.
+  Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+  If today is {2012,12,21}
+  iex(1)&gt; Chronos.beginning_of_week
+  {2012,12,17}
+  iex(2)&gt; Chronos.beginning_of_week({2015,1,20})
+  {2015,1,19}
+  iex(3)&gt; Chronos.beginning_of_week({2015,1,20},3)
+  {2015,1,14}</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#datetime_to_seconds/1">datetime_to_seconds(datetime)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#day/1">day(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The day function allows you to extract the day from a date tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#days_ago/2">days_ago(days, date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The following functions all have similar behavior. The days_ago/2 and weeks_ago/2
+  functions take a integer representing the number of days or weeks in the past and
+  return the corresponding date. There is a optional argument for a date to base the
+  calculation on but if no date is provided then the current date is used</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#days_from/2">days_from(days, date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#end_of_week/2">end_of_week(date \\ today(), end_day \\ 7)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>#end_of_week/2 function returns the date of starting day of the week for given date.
+  It defaults to today for given date and Sunday(7) for ending day of the week.
+  Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+  If today is {2012,12,21}
+  iex(1)&gt; Chronos.end_of_week
+  {2012,12,23}
+  iex(2)&gt; Chronos.end_of_week({2015,1,20})
+  {2015,1,25}
+  iex(3)&gt; Chronos.end_of_week({2015,1,20},3)
+  {2015,1,21}</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#epoch_time/1">epoch_time(datetime)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The epoch_time/1 function returns the number of seconds since January 1, 1970 00:00:00.
+  If the date is prior to January 1, the integer will be negative</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#friday?/1">friday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#from_epoch_time/1">from_epoch_time(timestamp)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The from_epoch_time/1 function converts from epoch time to datetime tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hour/1">hour(datetime \\ now())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The hour function allows you to extract the hour from a date/time tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#min/1">min(datetime \\ now())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The min function allows you to extract the minutes from a date/time tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#monday?/1">monday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#month/1">month(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The month function allows you to extract the month from a date tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#now/0">now()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#saturday?/1">saturday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#sec/1">sec(datetime \\ now())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The sec function allows you to extract the seconds from a date/time tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#sunday?/1">sunday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#thursday?/1">thursday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#today/0">today()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Chronos is an Elixir library for working with dates and times</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#tomorrow/1">tomorrow(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The tomorrow function is based on the current date</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#tuesday?/1">tuesday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#wday/1">wday(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns an integer representing the day of the week, 1..7, with Monday == 1</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#wednesday?/1">wednesday?(date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#weeks_ago/2">weeks_ago(weeks, date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#weeks_from/2">weeks_from(weeks, date \\ today())</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#yday/1">yday(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The yday function allows you to extract the day of the year (1-366) from a
+  date tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#year/1">year(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The year function allows you to extract the year from a date tuple</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#yesterday/1">yesterday(date \\ today())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The yesterday function is based on the current date</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="__using__/1">
+  
+  
+    <span id="__using__/0"></span>
+  
+  <div class="detail-header">
+    <a href="#__using__/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">__using__(opts \\ [])</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L331" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  There is an option to supply a date. This is handy for testing.</p>
+<p>  defmodule YourModule do</p>
+<pre><code class="elixir">use Chronos, date: {2012, 12, 21}</code></pre>
+<p>  end</p>
+<p>  iex(1)&gt; YourModule.today
+  {2012, 12, 21}</p>
+
+  </section>
+</div>
+<div class="detail" id="beginning_of_week/2">
+  
+  
+    <span id="beginning_of_week/0"></span>
+  
+    <span id="beginning_of_week/1"></span>
+  
+  <div class="detail-header">
+    <a href="#beginning_of_week/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">beginning_of_week(date \\ today(), start_day \\ 1)</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L204" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  #beginning_of_week/2 function returns the date of starting day of the week for given date.
+  It defaults to today for given date and Monday(1) for starting day of the week.
+  Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+  If today is {2012,12,21}
+  iex(1)&gt; Chronos.beginning_of_week
+  {2012,12,17}
+  iex(2)&gt; Chronos.beginning_of_week({2015,1,20})
+  {2015,1,19}
+  iex(3)&gt; Chronos.beginning_of_week({2015,1,20},3)
+  {2015,1,14}</p>
+
+  </section>
+</div>
+<div class="detail" id="datetime_to_seconds/1">
+  
+  
+  <div class="detail-header">
+    <a href="#datetime_to_seconds/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">datetime_to_seconds(datetime)</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L28" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="day/1">
+  
+  
+    <span id="day/0"></span>
+  
+  <div class="detail-header">
+    <a href="#day/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">day(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L80" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The day function allows you to extract the day from a date tuple</p>
+<p>  iex(1)&gt; Chronos.day({2013, 8, 21})
+  21</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.day
+  21</p>
+
+  </section>
+</div>
+<div class="detail" id="days_ago/2">
+  
+  
+    <span id="days_ago/1"></span>
+  
+  <div class="detail-header">
+    <a href="#days_ago/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">days_ago(days, date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L257" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The following functions all have similar behavior. The days_ago/2 and weeks_ago/2
+  functions take a integer representing the number of days or weeks in the past and
+  return the corresponding date. There is a optional argument for a date to base the
+  calculation on but if no date is provided then the current date is used.</p>
+<p>  iex(1)&gt; Chronos.days_ago(5)
+  {2013, 8, 16}</p>
+<p>  iex(2)&gt; Chronos.weeks_ago(3)
+  {2013, 3, 31}</p>
+<p>  The days_from/2 and weeks_from/2 return a future date calculated by the number
+  of days or weeks. There is a optional argument for a date to base the
+  calculation on but if no date is provided then the current date is used.</p>
+<p>  iex(1)&gt; Chronos.days_from(5)
+  {2013, 8, 26}</p>
+<p>  iex(2)&gt; Chronos.weeks_from(3)
+  {2013, 9, 11}</p>
+
+  </section>
+</div>
+<div class="detail" id="days_from/2">
+  
+  
+    <span id="days_from/1"></span>
+  
+  <div class="detail-header">
+    <a href="#days_from/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">days_from(days, date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L265" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="end_of_week/2">
+  
+  
+    <span id="end_of_week/0"></span>
+  
+    <span id="end_of_week/1"></span>
+  
+  <div class="detail-header">
+    <a href="#end_of_week/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">end_of_week(date \\ today(), end_day \\ 7)</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L223" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  #end_of_week/2 function returns the date of starting day of the week for given date.
+  It defaults to today for given date and Sunday(7) for ending day of the week.
+  Mon = 1, Tue = 2, Wed =3 , Thu = 4 , Fri = 5 , Sat = 6 , Sun = 7
+  If today is {2012,12,21}
+  iex(1)&gt; Chronos.end_of_week
+  {2012,12,23}
+  iex(2)&gt; Chronos.end_of_week({2015,1,20})
+  {2015,1,25}
+  iex(3)&gt; Chronos.end_of_week({2015,1,20},3)
+  {2015,1,21}</p>
+
+  </section>
+</div>
+<div class="detail" id="epoch_time/1">
+  
+  
+  <div class="detail-header">
+    <a href="#epoch_time/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">epoch_time(datetime)</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L24" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The epoch_time/1 function returns the number of seconds since January 1, 1970 00:00:00.
+  If the date is prior to January 1, the integer will be negative.</p>
+<p>  iex(1)&gt; Chronos.epoch_time({2012, 12, 21}, {12, 30, 55}}</p>
+
+  </section>
+</div>
+<div class="detail" id="friday?/1">
+  
+  
+    <span id="friday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#friday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">friday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L144" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="from_epoch_time/1">
+  
+  
+  <div class="detail-header">
+    <a href="#from_epoch_time/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">from_epoch_time(timestamp)</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L35" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The from_epoch_time/1 function converts from epoch time to datetime tuple.</p>
+<p>  iex(1)&gt; Chronos.from_epoch_time(1356048000)</p>
+
+  </section>
+</div>
+<div class="detail" id="hour/1">
+  
+  
+    <span id="hour/0"></span>
+  
+  <div class="detail-header">
+    <a href="#hour/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">hour(datetime \\ now())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L95" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The hour function allows you to extract the hour from a date/time tuple</p>
+<p>  iex&gt; Chronos.hour({{2013, 8, 21}, {13, 34, 45}})
+  13</p>
+<p>  iex&gt; {{2013, 8, 21}, {13, 34, 45}} |&gt; Chronos.hour
+  13</p>
+
+  </section>
+</div>
+<div class="detail" id="min/1">
+  
+  
+    <span id="min/0"></span>
+  
+  <div class="detail-header">
+    <a href="#min/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">min(datetime \\ now())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L110" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The min function allows you to extract the minutes from a date/time tuple</p>
+<p>  iex&gt; Chronos.min({{2013, 8, 21}, {13, 34, 45}})
+  34</p>
+<p>  iex&gt; {{2013, 8, 21}, {13, 34, 45}} |&gt; Chronos.min
+  34</p>
+
+  </section>
+</div>
+<div class="detail" id="monday?/1">
+  
+  
+    <span id="monday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#monday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">monday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L140" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="month/1">
+  
+  
+    <span id="month/0"></span>
+  
+  <div class="detail-header">
+    <a href="#month/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">month(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L65" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The month function allows you to extract the month from a date tuple</p>
+<p>  iex(1)&gt; Chronos.month({2013, 8, 21})
+  8</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.month
+  8</p>
+
+  </section>
+</div>
+<div class="detail" id="now/0">
+  
+  
+  <div class="detail-header">
+    <a href="#now/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">now()</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L15" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="saturday?/1">
+  
+  
+    <span id="saturday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#saturday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">saturday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L145" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="sec/1">
+  
+  
+    <span id="sec/0"></span>
+  
+  <div class="detail-header">
+    <a href="#sec/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">sec(datetime \\ now())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L125" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The sec function allows you to extract the seconds from a date/time tuple</p>
+<p>  iex&gt; Chronos.sec({{2013, 8, 21}, {13, 34, 45}})
+  45</p>
+<p>  iex&gt; {{2013, 8, 21}, {13, 34, 45}} |&gt; Chronos.sec
+  45</p>
+
+  </section>
+</div>
+<div class="detail" id="sunday?/1">
+  
+  
+    <span id="sunday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#sunday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">sunday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L139" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="thursday?/1">
+  
+  
+    <span id="thursday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#thursday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">thursday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L143" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="today/0">
+  
+  
+  <div class="detail-header">
+    <a href="#today/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">today()</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L13" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  Chronos is an Elixir library for working with dates and times.</p>
+<p>  iex(1)&gt; Chronos.today
+  {2013, 8, 21}</p>
+
+  </section>
+</div>
+<div class="detail" id="tomorrow/1">
+  
+  
+    <span id="tomorrow/0"></span>
+  
+  <div class="detail-header">
+    <a href="#tomorrow/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">tomorrow(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L191" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The tomorrow function is based on the current date</p>
+<p>  iex(1)&gt; Chronos.tomorrow
+  {2013, 8, 22}</p>
+<p>  or you can pass it a date:</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.tomorrow
+  {2012, 12, 22}</p>
+
+  </section>
+</div>
+<div class="detail" id="tuesday?/1">
+  
+  
+    <span id="tuesday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#tuesday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">tuesday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L141" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="wday/1">
+  
+  
+    <span id="wday/0"></span>
+  
+  <div class="detail-header">
+    <a href="#wday/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">wday(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L137" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  Returns an integer representing the day of the week, 1..7, with Monday == 1.</p>
+<p>  iex(1)&gt; Chronos.wday({2013, 8, 21})
+  3</p>
+
+  </section>
+</div>
+<div class="detail" id="wednesday?/1">
+  
+  
+    <span id="wednesday?/0"></span>
+  
+  <div class="detail-header">
+    <a href="#wednesday?/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">wednesday?(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L142" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="weeks_ago/2">
+  
+  
+    <span id="weeks_ago/1"></span>
+  
+  <div class="detail-header">
+    <a href="#weeks_ago/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">weeks_ago(weeks, date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L273" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="weeks_from/2">
+  
+  
+    <span id="weeks_from/1"></span>
+  
+  <div class="detail-header">
+    <a href="#weeks_from/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">weeks_from(weeks, date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L281" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="yday/1">
+  
+  
+    <span id="yday/0"></span>
+  
+  <div class="detail-header">
+    <a href="#yday/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">yday(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L157" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The yday function allows you to extract the day of the year (1-366) from a
+  date tuple</p>
+<p>  iex(1)&gt; Chronos.yday({2013, 8, 21})
+  233</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.day
+  356</p>
+
+  </section>
+</div>
+<div class="detail" id="year/1">
+  
+  
+    <span id="year/0"></span>
+  
+  <div class="detail-header">
+    <a href="#year/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">year(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L50" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The year function allows you to extract the year from a date tuple</p>
+<p>  iex(1)&gt; Chronos.year({2013, 8, 21})
+  2013</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.year
+  2012</p>
+
+  </section>
+</div>
+<div class="detail" id="yesterday/1">
+  
+  
+    <span id="yesterday/0"></span>
+  
+  <div class="detail-header">
+    <a href="#yesterday/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">yesterday(date \\ today())</span>
+    
+      <a href="https://github.com/nurugger07/chronos/blob/master/lib/chronos.ex#L178" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>  The yesterday function is based on the current date</p>
+<p>  iex(1)&gt; Chronos.yesterday
+  {2013, 8, 20}</p>
+<p>  or you can pass it a date:</p>
+<p>  iex(2)&gt; {2012, 12, 21} |&gt; Chronos.yesterday
+  {2012, 12, 20}</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-9bd040e5e5.js"></script>
+  
+  
+  
+  
+  </body>
+</html>
+
