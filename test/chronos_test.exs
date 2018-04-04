@@ -11,11 +11,11 @@ defmodule ChronosTest do
   import HourGlassFixture
 
   test :today do
-    assert today == @today
+    assert today() == @today
   end
 
   test :now do
-    assert :calendar.now_to_datetime(:erlang.now) == now
+    assert :calendar.now_to_datetime(:erlang.timestamp) == now()
   end
 
   test :epoch_time do
@@ -34,15 +34,15 @@ defmodule ChronosTest do
   end
 
   test :year do
-    assert today |> year == _extract_seg(@today, :year)
+    assert today() |> year == _extract_seg(@today, :year)
   end
 
   test :month do
-    assert today |> month == _extract_seg(@today, :month)
+    assert today() |> month == _extract_seg(@today, :month)
   end
 
   test :day do
-    assert today |> day == _extract_seg(@today, :day)
+    assert today() |> day == _extract_seg(@today, :day)
   end
 
   test :hour do
@@ -81,17 +81,17 @@ defmodule ChronosTest do
   end
 
   test :yesterday do
-    assert today |> yesterday == { 2012, 12, 20 }
-    assert yesterday == { 2012, 12, 20 }
+    assert today() |> yesterday() == { 2012, 12, 20 }
+    assert yesterday() == { 2012, 12, 20 }
 
-    assert { 2013, 1, 1 } |> yesterday == { 2012, 12, 31 }
+    assert { 2013, 1, 1 } |> yesterday() == { 2012, 12, 31 }
   end
 
   test :tomorrow do
-    assert today |> tomorrow == { 2012, 12, 22 }
-    assert tomorrow == { 2012, 12, 22 }
+    assert today() |> tomorrow() == { 2012, 12, 22 }
+    assert tomorrow() == { 2012, 12, 22 }
 
-    assert { 2012, 12, 31 } |> tomorrow == { 2013, 1, 1 }
+    assert { 2012, 12, 31 } |> tomorrow() == { 2013, 1, 1 }
   end
 
   test :days_ago do
